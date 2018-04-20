@@ -3,7 +3,6 @@ from trie import Node
 from tqdm import tqdm
 
 app = Flask(__name__, static_url_path='')
-
 root = Node()
 
 
@@ -31,6 +30,8 @@ def initialize_trie():
             root.insert(domain)
 
 
+initialize_trie()
+
+
 if __name__ == "__main__":
-    initialize_trie()
     app.run(host='0.0.0.0', port=80)
