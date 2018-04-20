@@ -13,7 +13,11 @@ export default class Results extends React.Component {
     ))
     return (
       <List>
-        <Subheader show={results.length}>{`Showing ${results.length} results out of ${this.props.total}`}</Subheader>
+        {
+          results.length > 0
+            ? <Subheader>{`Showing ${results.length} results out of ${this.props.total}`}</Subheader>
+            : null
+        }
         {results}
       </List>
     )

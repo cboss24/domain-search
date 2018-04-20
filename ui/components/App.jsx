@@ -3,7 +3,7 @@ import axios from 'axios'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import Results from './Results.jsx'
 import { AutoComplete } from 'material-ui'
-import { Grid, Row, Col } from 'react-bootstrap'
+import { Grid, Row, Col, Jumbotron } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.css'
 
 const maxSuggestions = 10
@@ -17,7 +17,8 @@ export default class App extends React.Component {
     this.state = {
       all: [],
       suggestions: [],
-      results: []
+      results: [],
+      total: 0,
     }
   }
 
@@ -43,35 +44,33 @@ export default class App extends React.Component {
       window.open(`http://${url}`, "_blank")
     } else {
       this.setState({
-        results: this.state.all.slice(0, maxResults)
+        results: this.state.all.slice(0, maxResults),
+        total: this.state.all.length
       })
     }
   }
 
   render() {
     return (
-
         <MuiThemeProvider>
           <Grid>
-            <Row className="show-grid">
-              <Col lg={8}>
-                <AutoComplete
-                  dataSource={this.state.suggestions}
-                  hintText="Search Domains..."
-                  onUpdateInput={this.onUpdateInput}
-                  onNewRequest={this.onNewRequest}
-                  fullWidth
-                />
-              </Col>
-              <Col lg={4}>
+              <Col lg={12}>
+                <Jumbotron>
+                  <h1>Domain Search</h1>
+                  <AutoComplete
+                    dataSource={this.state.suggestions}
+                    hintText="Search Domains..."
+                    onUpdateInput={this.onUpdateInput}
+                    onNewRequest={this.onNewRequest}
+                    fullWidth
+                  />
+                </Jumbotron>
                 <Results
                   results={this.state.results}
-                  total={this.state.all.length}
+                  total={this.state.total}
                 />
               </Col>
-            </Row>
           </Grid>
-
         </MuiThemeProvider>
     )
   }

@@ -7,8 +7,8 @@ build-api:
 	docker build -t domain-search .
 
 build-ui:
-#	yarn --cwd ./ui
-#	yarn --cwd ./ui build
+	yarn --cwd ./ui
+	yarn --cwd ./ui build
 
 build: build-ui build-api
 
